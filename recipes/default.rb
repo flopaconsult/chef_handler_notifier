@@ -16,14 +16,16 @@ pony_install.run_action(:run)
 
 Gem.clear_paths
 
-myfile = cookbook_file "/var/chef/handlers/email_me.rb" do
+#myfile = cookbook_file "/var/chef/handlers/email_me.rb" do
+myfile = cookbook_file "/var/lib/email_me.rb" do
   source "email_me" 
   mode 00644
 end
 myfile.run_action(:create)
 
 chef_handler "MyOrganization::EmailMe" do
-  source "/var/chef/handlers/email_me"
+  #source "/var/chef/handlers/email_me"
+   source "/var/lib/email_me"
   arguments "flopaconsult@gmail.com"
   # in order to send notifications only in case of exceptions
   #supports :exception => true
